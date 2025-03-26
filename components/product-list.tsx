@@ -25,7 +25,6 @@ export default function ProductList({ products }: ProductListProps) {
 
   const dispatch = useAppDispatch()
 
-
   const handleBuyItem = (product: Product) => {
     const newProduct = {
       id: product.id,

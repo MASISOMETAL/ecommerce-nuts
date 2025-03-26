@@ -2,64 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { ShoppingCart, ArrowLeft } from "lucide-react"
 import styles from "./page.module.css"
+import { products } from "@/app/data/products"
 
-// Sample product data - in a real app, this would come from an API or database
-const products = [
-  {
-    id: 1,
-    name: "Nueces Peladas",
-    price: 8.99,
-    image: "/img/nueces-peladas.jpg?height=500&width=500",
-    slug: "nueces-peladas",
-    category: "nueces",
-    description: "Nueces peladas de la mejor calidad, ricas en omega-3 y antioxidantes.",
-    longDescription:
-      "Nuestras nueces peladas son seleccionadas cuidadosamente para garantizar la mejor calidad. Son ricas en ácidos grasos omega-3, proteínas, fibra, vitaminas y minerales. Perfectas para consumir como snack saludable o para incorporar en tus recetas favoritas.",
-    nutritionalInfo: {
-      calories: "654 kcal",
-      protein: "15.2 g",
-      carbs: "13.7 g",
-      fat: "65.2 g",
-      fiber: "6.7 g",
-    },
-  },
-  {
-    id: 2,
-    name: "Almendras Naturales",
-    price: 7.5,
-    image: "/img/almendras-naturales.jpg?height=500&width=500",
-    slug: "almendras-naturales",
-    category: "almendras",
-    description: "Almendras naturales sin tostar, perfectas para snacks saludables o para preparar leche de almendras.",
-    longDescription:
-      "Nuestras almendras naturales son de cultivo sostenible y no han sido sometidas a ningún proceso de tostado. Conservan todo su sabor y propiedades nutricionales. Son una excelente fuente de proteínas, fibra, vitamina E y grasas saludables.",
-    nutritionalInfo: {
-      calories: "579 kcal",
-      protein: "21.2 g",
-      carbs: "21.7 g",
-      fat: "49.9 g",
-      fiber: "12.5 g",
-    },
-  },
-  {
-    id: 3,
-    name: "Mix de Frutos Secos",
-    price: 9.99,
-    image: "/img/mix-frutos-secos.jpg?height=500&width=500",
-    slug: "mix-frutos-secos",
-    category: "mix",
-    description: "Mezcla equilibrada de nueces, almendras, avellanas y pasas para un snack nutritivo.",
-    longDescription:
-      "Descubre el Mix de Frutos Secos Premium, una exquisita selección de los mejores frutos secos, ideal para cualquier momento del día. Perfecto para llevar contigo y disfrutar de un snack saludable y lleno de energía.",
-    nutritionalInfo: {
-      calories: "600 kcal",
-      protein: "20 g",
-      carbs: "22 g",
-      fat: "50 g",
-      fiber: "10.1 g",
-    },
-  },
-]
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const product = products.find((p) => p.slug === params.slug)
@@ -117,7 +61,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <div className={styles.price}>${product.price.toFixed(2)}</div>
 
           <div className={styles.description}>
-            <p>{product.longDescription}</p>
+            <p>{product.description}</p>
           </div>
 
           <div className={styles.actions}>

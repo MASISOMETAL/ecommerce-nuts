@@ -1,7 +1,11 @@
+'use client'
+
 import Link from "next/link"
 import Image from "next/image"
 import { ShoppingCart } from "lucide-react"
 import styles from "./product-list.module.css"
+import { useAppDispatch } from "@/app/store/hooks";
+import { addItem } from "@/app/store/slices/cartSlice";
 
 interface Product {
   id: number;
@@ -18,6 +22,22 @@ interface ProductListProps {
 }
 
 export default function CategoriesFilter({ products }: ProductListProps) {
+
+  const dispatch = useAppDispatch()
+
+  const handleBuyItem = (product: Product) => {
+    const newProduct = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+      slug: product.slug,
+    }
+
+    dispatch(addItem(newProduct))
+  }
+
   return (
     <div className={styles.productList}>
       {products.map((product) => (
@@ -37,7 +57,7 @@ export default function CategoriesFilter({ products }: ProductListProps) {
             </Link>
             <p className={styles.description}>{product.description}</p>
             <div className={styles.price}>${product.price.toFixed(2)}</div>
-            <button className={styles.button}>
+            <button className={styles.button} onClick={()=> handleBuyItem(product)}>
               <ShoppingCart size={16} />
               Añadir al Carrito
             </button>
